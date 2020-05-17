@@ -41,7 +41,7 @@ public class DecryptRequestAdvice implements RequestBodyAdvice {
         Annotation[] annotations = methodParameter.getMethod().getAnnotations();
 
         //如果返回值的RestController上的注解为空则不需要验证
-        if(annotations.length == 0){
+        if (annotations.length == 0) {
             return false;
         }
 
@@ -55,12 +55,12 @@ public class DecryptRequestAdvice implements RequestBodyAdvice {
         String content = new BufferedReader(new InputStreamReader(httpInputMessage.getBody()))
                 .lines().collect(Collectors.joining(System.lineSeparator()));
 
-        if(StringUtils.isEmpty(content)){
+        if (StringUtils.isEmpty(content)) {
             throw new IllegalArgumentException("加密串为空");
         }
         EncryptData encryptData = JSONObject.parseObject(content, EncryptData.class);
 
-        if(encryptData == null){
+        if (encryptData == null) {
             throw new IllegalArgumentException("加密串为空");
         }
 
@@ -69,7 +69,7 @@ public class DecryptRequestAdvice implements RequestBodyAdvice {
         Encrypt encrypt = encryptFactory.getDecrypt(annotations);
         String decryptData = encrypt.decrypt(encryptData.getData(), encrypt.getDecryptKey());
 
-        return new DecryptHttpInputMessage(httpInputMessage,decryptData);
+        return new DecryptHttpInputMessage(httpInputMessage, decryptData);
     }
 
     @Override

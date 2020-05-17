@@ -13,7 +13,9 @@ import java.lang.annotation.*;
 @Documented
 public @interface AESDecrypt {
 
-    /** 参数类型 json/String **/
+    /**
+     * 参数类型 json/String
+     **/
     ParameterType type() default ParameterType.JSON_TYPE;
 
 }

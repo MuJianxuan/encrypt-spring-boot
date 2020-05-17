@@ -6,10 +6,14 @@ package open.source.encrypt.constant;
  **/
 public final class EncryptConstant {
 
-    /**RSA **/
+    /**
+     * RSA
+     **/
     public static String RSA = "RSA";
 
-    /**AES **/
+    /**
+     * AES
+     **/
     public static String AES = "AES";
 
 }

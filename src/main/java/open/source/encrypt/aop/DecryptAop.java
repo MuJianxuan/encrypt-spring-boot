@@ -30,6 +30,7 @@ public class DecryptAop {
 
     /**
      * 针对RSA加密的字符串进行解密
+     *
      * @param pjp
      * @param rsaDecrypt
      * @return
@@ -40,13 +41,13 @@ public class DecryptAop {
                          RSADecrypt rsaDecrypt) throws Throwable {
 
         /**只对Pram入参进行解密**/
-        if(rsaDecrypt.type().equals(ParameterType.JSON_TYPE)){
+        if (rsaDecrypt.type().equals(ParameterType.JSON_TYPE)) {
             return pjp.proceed();
         }
 
         //对Param 的参数进行解密
         Object[] args = pjp.getArgs();
-        if(args.length == 0){
+        if (args.length == 0) {
             return pjp.proceed();
         }
 
@@ -58,6 +59,7 @@ public class DecryptAop {
 
     /**
      * 针对AES加密的字符串进行解密
+     *
      * @param pjp
      * @param aesDecrypt
      * @return
@@ -69,7 +71,7 @@ public class DecryptAop {
         Object[] args = pjp.getArgs();
 
         Encrypt encrypt = encryptFactory.getDecrypt(aesDecrypt.annotationType().getName());
-        if(encrypt == null){
+        if (encrypt == null) {
             throw new NullPointerException("加密对象不存在");
         }
 
@@ -78,19 +80,20 @@ public class DecryptAop {
 
     /**
      * 针对字符串入参进行解密
+     *
      * @param encrypt
      * @param args
      * @return
      * @throws Exception
      */
-    private Object[] decryptArgs(Encrypt encrypt,Object[] args) throws Exception {
+    private Object[] decryptArgs(Encrypt encrypt, Object[] args) throws Exception {
         Object[] params = new Object[args.length];
         int i = 0;
         for (Object arg : args) {
             //如果是字符串则需要解密
-            if(arg instanceof String){
+            if (arg instanceof String) {
                 String decrypt = encrypt.decrypt((String) arg, encrypt.getDecryptKey());
-                params[i] = decrypt.substring(1,decrypt.length()-1);
+                params[i] = decrypt.substring(1, decrypt.length() - 1);
                 continue;
             }
             params[i] = arg;

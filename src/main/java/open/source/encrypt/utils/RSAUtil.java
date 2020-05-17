@@ -19,6 +19,7 @@ import java.util.Map;
 
 /**
  * RSA Util
+ *
  * @author Rao
  * @msg 框架本身是基于服务端的(类设计的好差)
  * 客户端使用公钥加密 服务端使用私钥解密
@@ -42,7 +43,9 @@ public class RSAUtil implements Encrypt {
 
     public static Map<String, String> keyMap = new HashMap<>();
 
-    /**密钥处理**/
+    /**
+     * 密钥处理
+     **/
     public static String formatString(String source) {
         if (source == null) {
             return null;
@@ -161,34 +164,38 @@ public class RSAUtil implements Encrypt {
             byte[] b = data.getBytes(UTF8);
             byte[] decrypt = cipher.doFinal(Base64.decodeBase64(b));
             return new String(decrypt, UTF8);
-        } catch (Exception e){
-            throw new RuntimeException(""+e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("" + e.getMessage());
         }
     }
+
     /**
      * 私钥解密
-     * @param data 数据
+     *
+     * @param data       数据
      * @param privateKey 密钥
      * @return
      */
     @Override
     public String decrypt(String data, String privateKey) throws Exception {
-        return RSAUtil.decryptByPublicKey(data,privateKey);
+        return RSAUtil.decryptByPublicKey(data, privateKey);
     }
 
     /**
      * 私钥加密
-     * @param data 数据
+     *
+     * @param data       数据
      * @param privateKey 密钥
      * @return
      */
     @Override
     public String encrypt(String data, String privateKey) throws Exception {
-        return RSAUtil.encryptByPrivateKey(data,privateKey);
+        return RSAUtil.encryptByPrivateKey(data, privateKey);
     }
 
     /**
      * 获取私钥 私钥加密  私钥解密
+     *
      * @return
      */
     @Override
@@ -203,6 +210,7 @@ public class RSAUtil implements Encrypt {
 
     /**
      * 获取注解名称
+     *
      * @return
      */
     @Override

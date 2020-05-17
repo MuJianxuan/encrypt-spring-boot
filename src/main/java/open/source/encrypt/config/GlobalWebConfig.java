@@ -20,6 +20,7 @@ public class GlobalWebConfig implements WebMvcConfigurer {
 
     /**
      * 添加FastJson提供的Message消息处理，可以对返回的字符串进行封装  -->出现字符串解析bug，
+     *
      * @param converters
      */
     @Override
@@ -28,7 +29,7 @@ public class GlobalWebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FastJsonHttpMessageConverter fastJsonHttpMessageConverter(){
+    public FastJsonHttpMessageConverter fastJsonHttpMessageConverter() {
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);

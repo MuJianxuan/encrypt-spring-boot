@@ -14,7 +14,9 @@ import java.lang.annotation.*;
 @Documented
 public @interface RSADecrypt {
 
-    /** 参数类型 json/String参数 **/
+    /**
+     * 参数类型 json/String参数
+     **/
     ParameterType type() default ParameterType.JSON_TYPE;
 
 }

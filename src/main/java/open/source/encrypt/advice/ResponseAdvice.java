@@ -25,10 +25,10 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object returnBody, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if(returnBody == null){
+        if (returnBody == null) {
             return Result.success();
         }
-        if(returnBody instanceof Response){
+        if (returnBody instanceof Response) {
             return returnBody;
         }
         return Result.success(returnBody);

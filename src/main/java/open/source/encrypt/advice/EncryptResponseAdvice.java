@@ -36,7 +36,7 @@ public class EncryptResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
         //如果没有开启加密框架的注解则不执行该
-        if(! config.getEnable()){
+        if (!config.getEnable()) {
             return false;
         }
         //true才会执行下面的beforeBodyWrite
@@ -44,7 +44,7 @@ public class EncryptResponseAdvice implements ResponseBodyAdvice<Object> {
         Annotation[] annotations = methodParameter.getMethod().getAnnotations();
 
         //如果返回值的RestController上的注解为空则不需要验证
-        if(annotations.length == 0){
+        if (annotations.length == 0) {
             return false;
         }
 
@@ -53,7 +53,8 @@ public class EncryptResponseAdvice implements ResponseBodyAdvice<Object> {
 
     /**
      * 需要实现动态获取当前加密对象以及
-     * @param returnBody 返回的数据集
+     *
+     * @param returnBody         返回的数据集
      * @param methodParameter
      * @param mediaType
      * @param aClass
@@ -68,7 +69,7 @@ public class EncryptResponseAdvice implements ResponseBodyAdvice<Object> {
                                   ServerHttpRequest serverHttpRequest,
                                   ServerHttpResponse serverHttpResponse) {
         //获取需加密数据的对象
-        if(returnBody == null){
+        if (returnBody == null) {
             throw new NullPointerException("[封装加密数据] --> 返回的需要加密数据不能为 null");
         }
         String data = JSON.toJSONString(returnBody);
@@ -76,6 +77,6 @@ public class EncryptResponseAdvice implements ResponseBodyAdvice<Object> {
         //获取对象
         Encrypt encrypt = encryptFactory.getEncrypt(annotations);
 
-        return Result.success(encrypt.encrypt(data,encrypt.getEncryptKey())).encrypt();
+        return Result.success(encrypt.encrypt(data, encrypt.getEncryptKey())).encrypt();
     }
 }

@@ -16,7 +16,9 @@ import java.io.Serializable;
 public class EncryptData implements Serializable {
     private static final long serialVersionUID = 237211734986143099L;
 
-    /**加密数据**/
+    /**
+     * 加密数据
+     **/
     private String data;
 
 }

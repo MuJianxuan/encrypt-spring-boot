@@ -30,7 +30,6 @@ public class DecryptHttpInputMessage implements HttpInputMessage {
     }
 
 
-
     public DecryptHttpInputMessage(HttpInputMessage inputMessage, String privateKey, String charset, boolean showLog) throws Exception {
 
         if (StringUtils.isEmpty(privateKey)) {
@@ -56,7 +55,7 @@ public class DecryptHttpInputMessage implements HttpInputMessage {
                 }
             }
             decryptBody = json.toString();
-            if(showLog) {
+            if (showLog) {
                 log.info("Encrypted data received：{},After decryption：{}", content, decryptBody);
             }
         }
@@ -64,7 +63,7 @@ public class DecryptHttpInputMessage implements HttpInputMessage {
     }
 
     @Override
-    public InputStream getBody(){
+    public InputStream getBody() {
         return body;
     }
 
